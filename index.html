@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/external.css" >
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" >
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <h1>Welcome to Web GIS</h1>
+    <p style="color: blue;">This is the introductory class of web development</p>
+    <div id="map">
+
+    </div>
+    <button id="btn1" onclick="alert('OUCH!!!')">Hit Me</button>
+    <div id="objectcall"> Its here</div>
+    <script>
+        // explore the concept of Document Object Model DOM
+        // const btn1_dom= document.getElementById("btn1");
+        // const btn1_dom= document.querySelector('#btn1'); //css based query
+        // btn1_dom.addEventListener('click',function(){
+        //     alert('OMG!!!');
+        // });
+        // explore more on concept of object or 
+        const nou2078={
+            student:24,
+            exam:function(internal, final){
+                return internal+final;
+            }
+        };
+        console.log(nou2078.exam(46,46));
+        const objProperties = document.querySelector('#objectcall');
+        objProperties.innerHTML=nou2078.exam(43,43);
+    </script>
+    <script src="/js/external.js"></script>
+
+</body>
+</html>
