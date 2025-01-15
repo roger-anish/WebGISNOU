@@ -5,8 +5,15 @@ const btn1_dom= document.querySelector('#btn1'); //css based query
 
 // initialize the map on the "map" div with a given center and zoom
 var map = L.map('map', {
-    center: [40.71, -74],
-    zoom: 15
+    center: [26.6,84],
+    // center: [40.71, -74],
+    zoom: 6
+});
+
+var lirc = L.tileLayer.wms("http://localhost:8080/geoserver/LIRC/wms?service=WMS",{
+    layers: 'LIRC:map_data',
+    format: 'image/png',
+    attribution:'form entry data of lirc',
 });
 
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -33,6 +40,12 @@ var Manhattan = L.tileLayer.wms("http://localhost:8080/geoserver/tiger/wms?servi
     // cql_filter: "NAME='lox'"
 }).addTo(map);
 
+var lirc = L.tileLayer.wms("http://localhost:8080/geoserver/LIRC/ows?service=WFS",{
+    layers: 'LIRC:map_data',
+    format: 'shapefile',
+    attribution:'form entry data of lirc',
+});
+
 // for cql filter in wms layer
 const showloc=function(){
     const selctedval = document.getElementById("name").value;  // to extract the name of the attribute
@@ -53,13 +66,16 @@ console.log(mylocation.getLatLng());
 L.control.scale({maxWidth:100}).addTo(map);
 // lager toggle section
 var baseLayers = {
+    "LIRC": lirc,
     "OSM": tiles,
     "Imagery":Esri_WorldImagery,
     "World Map":world_map,
+    
 };
 var overlays = {
     "Default Location": mylocation,
-    "Manhattan": Manhattan
+    "Manhattan": Manhattan,
+    // "LIRC": lirc,
     // "Roads": roadsLayer
 };
-L.control.layers(baseLayers, overlays).addTo(map);
+L.control.layers(overlays,baseLayers).addTo(map);
